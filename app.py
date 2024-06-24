@@ -34,28 +34,28 @@ def welcome(username):
     return render_template('welcome.html', username=username)
 
 @app.route("/")
-def index():
+def search():
     # Získanie údajov o cestách z databázy
     cur = conn.cursor()
-    cur.execute("SELECT * FROM cesty")
-    cesty = cur.fetchall()
+    cur.execute("SELECT * FROM route")
+    route = cur.fetchall()
     cur.close()
-    return render_template("index.html", cesty=cesty)
+    return render_template("search.html", route=route)
 
-@app.route("/nova_cesta", methods=["POST"])
-def nova_cesta():
+@app.route("/new_ride", methods=["POST"])
+def offer():
     # Spracovanie formulára na vytvorenie novej cesty
-    trasa = request.form.get("trasa")
-    cas = request.form.get("cas")
-    podmienky = request.form.get("podmienky")
+    route = request.form.get("route")
+    date = request.form.get("date")
+    notes = request.form.get("notes")
 
     cur = conn.cursor()
-    cur.execute("INSERT INTO cesty (trasa, cas, podmienky) VALUES (%s, %s, %s)",
-                (trasa, cas, podmienky))
+    cur.execute("INSERT INTO route (route, date, notes) VALUES (%s, %s, %s)",
+                (route, date, notes))
     conn.commit()
     cur.close()
 
-    return redirect(url_for("index"))
+    return redirect(url_for("offer"))
 
 
 if __name__ == "__main__":

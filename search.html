@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>New Route</h1>
+    <form method="POST" action="/new route">
+        <input type="text" name="trasa" placeholder="From">
+        <input type="text" name="trasa" placeholder="To">
+        <input type="text" name="cas" placeholder="Date">
+        <input type="text" name="podmienky" placeholder="Notes">
+        <button type="submit">Add Route</button>
+    </form>
+    <ul>
+        {% for cesta in cesty %}
+            <li>{{ cesta[1] }} - {{ cesta[2] }} - {{ cesta[3] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
