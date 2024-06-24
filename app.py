@@ -33,25 +33,29 @@ def login():
 def welcome(username):
     return render_template('welcome.html', username=username)
 
-@app.route("/")
+@app.route("/search")
 def search():
     # Získanie údajov o cestách z databázy
     cur = conn.cursor()
-    cur.execute("SELECT * FROM route")
-    route = cur.fetchall()
+    cur.execute("SELECT * FROM trip")
+    trip = cur.fetchall()
     cur.close()
-    return render_template("search.html", route=route)
+    return render_template("search.html", trip=trip)
 
 @app.route("/new_ride", methods=["POST"])
-def offer():
+def add_trip():
     # Spracovanie formulára na vytvorenie novej cesty
-    route = request.form.get("route")
+    depart_from = request.form.get("from")
+    arrive_to = request.form.get("to")
     date = request.form.get("date")
+    name = request.form.get("name")
+    email = request.form.get("email")
+    phone = request.form.get("phone")
     notes = request.form.get("notes")
 
     cur = conn.cursor()
-    cur.execute("INSERT INTO route (route, date, notes) VALUES (%s, %s, %s)",
-                (route, date, notes))
+    cur.execute("INSERT INTO trip (depart_from, arrive_to, date, name, email, phone, notes) VALUES (%s, %s, %s)",
+                (depart_from, arrive_to, date, name, email, phone, notes))
     conn.commit()
     cur.close()
 
