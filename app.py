@@ -5,10 +5,10 @@ app = Flask(__name__)
 
 # Pripojenie k databáze
 conn = psycopg2.connect(
-dbname='by1wvfyyi5kgu1euhyko',
-    user='u1ai5zsuzpe6y74uwyqu',
-    password='0BacMZwIRVg5rpsOcndFG1pcHSUba5',
-    host="by1wvfyyi5kgu1euhyko-postgresql.services.clever-cloud.com",
+    dbname='b1mxnbtfaytwhs4af34m',
+    user='uwj8p4v8zuoeyv3iqlxg',
+    password='Kh3N5D3JtxcCyJeXuUeeZVNCROL6Jo',
+    host="b1mxnbtfaytwhs4af34m-postgresql.services.clever-cloud.com",
     port=50013
 )
 
